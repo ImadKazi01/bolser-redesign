@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\helpers\BlockThemeHelper;
+
+/**
+ * Gets the different themes for the carousel blocks
+ *
+ * @param  array  $existing
+ * @param  string $type
+ * @param  string $theme
+ * @param  string $path
+ *
+ * @return array
+ */
+function carousel_blocks_theme(array $existing, string $type, string $theme, string $path): array {
+  return BlockThemeHelper::getBlockThemes([
+    'carousel_slide_block',
+  ]);
+}

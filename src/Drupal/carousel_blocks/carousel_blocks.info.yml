@@ -1,0 +1,11 @@
+name: Carousel blocks
+description: The blocks that can be used in the carousel layout sections
+package: Bolser
+
+type: module
+core_version_requirement: ^8 || ^9
+version: 8.x-1.0
+
+dependencies:
+  - base_block:base_block
+  - options

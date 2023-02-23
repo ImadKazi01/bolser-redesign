@@ -1,0 +1,19 @@
+{% extends '@base_block/base-layout-builder-block.html.twig' %}
+
+{% set additionalClasses = ['carousel__item', 'swiper-slide'] %}
+{% set img = content.image %}
+{% set title = content.title %}
+{% set jobTitle = content.job_title %}
+{% set description = content.description %}
+
+
+{% block content %}
+  <div class="carousel-slide js-carousel-slide" data-content="{{ content | json_encode }}">
+    <div class="carousel-slide__image lazyload" data-bg="{{ img }}" role="img" aria-label="{{ img }}">{{img}}</div>
+    <h3 class="carousel-slide__title">{{ title }}</h3>
+    <h4 class="carousel-slide__subtitle">{{ jobTitle }}</h4>
+    <div class="carousel-slide__description">
+      {{ description }}
+    </div>
+  </div>
+{% endblock %}

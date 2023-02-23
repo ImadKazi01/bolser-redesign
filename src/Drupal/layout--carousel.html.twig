@@ -1,0 +1,59 @@
+{# TODO: Address repetition in layout templates #}
+{%- if content -%}
+	{%- if editMode and content['#layout'].label is defined -%}
+		<p>{{ content['#layout'].label }}
+			section</p>
+	{%- endif -%}
+
+	{% set classes = ['layout', 'layout--carousel'] %}
+
+	{# Add layout--background-color modifier class if defined OR option selected isn't white (default) #}
+	{% set classes = attributes.bg_color is not empty and attributes.bg_color != 'white' ? classes | merge(["layout--background-color-#{attributes.bg_color}"]) : classes %}
+
+	{# Add layout--text-color modifier class if defined OR option selected isn't black (default) #}
+	{% set classes = attributes.text_color is not empty and attributes.text_color != 'black' ? classes | merge(["layout--text-color-#{attributes.text_color}"]) : classes %}
+
+	{# Add layout--padding-top modifier class if defined OR option selected isn't md (default) #}
+	{% set classes = attributes.padding_top is not empty and attributes.padding_top != 'md' ? classes | merge(["layout--padding-top-#{attributes.padding_top}"]) : classes %}
+
+	{# Add layout--padding-bottom modifier class if defined OR option selected isn't md (default) #}
+	{% set classes = attributes.padding_bottom is not empty and attributes.padding_bottom != 'md' ? classes | merge(["layout--padding-bottom-#{attributes.padding_bottom}"]) : classes %}
+
+	{# Add layout--mobile-padding-top modifier class if defined OR option selected isn't md (default) #}
+	{% set classes = attributes.mobile_padding_top is not empty and attributes.mobile_padding_top != 'md' ? classes | merge(["layout--mobile-padding-top-#{attributes.mobile_padding_top}"]) : classes %}
+
+	{# Add layout--mobile-padding-bottom modifier class if defined OR option selected isn't md (default) #}
+	{% set classes = attributes.mobile_padding_bottom is not empty and attributes.mobile_padding_bottom != 'md' ? classes | merge(["layout--mobile-padding-bottom-#{attributes.mobile_padding_bottom}"]) : classes %}
+
+	{% set regionClasses = ['layout__region', 'swiper-wrapper'] %}
+
+	{% if editMode %}
+		<div class="container">
+			<header style="margin-bottom: 1rem;">
+				<small>Note: This section is a little complex to accurately preview (and then edit) in layout builder. Please preview it on the frontend instead.</small>
+			</header>
+
+			<div class="layout__region" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter);">
+				{{- content -}}
+			</div>
+		</div>
+	{% else %}
+		<div class="{{ classes|join(' ') }} js-animate-in">
+			<div class="layout__container">
+				<div class="layout__swiper-track">
+					<div class="swiper-container js-staff-carousel">
+						<nav class="swiper-btns">
+							<div class="swiper-btn swiper-btn--prev"></div>
+							<div class="swiper-btn swiper-btn--next"></div>
+						</nav>
+						<section class="{{ regionClasses|join(' ') }}">
+							{{- content -}}
+              <div class="carousel__item swiper-slide swiper-slide--spacer"></div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+{%- endif -%}
